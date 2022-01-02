@@ -22,20 +22,16 @@ const handleSubmit = (e)=>{
   if(!input.marketItem || !input.marketPrice){
     //display alert
     showFlashMessage(true, 'please enter a list and price', 'danger')
-  } else if(input && isEditing) {
+  } else if (input && isEditing) {
     //alert
+    showFlashMessage(true, 'Item has been edited', 'success')
     const abc = listItem.map((newList)=> {
       if(newList.id === editID){
-        
-        console.log(listItem);
         return {...newList, list:input.marketItem, price:input.marketPrice}
       }
-      return listItem;
+      return newList;
     })
     setListItem(abc);
-    console.log(abc);
-    console.log(typeof(abc));
-    
     setInput({marketItem: '', marketPrice: ''});
     setEditId(null);
     setIsEditing(false);
@@ -59,17 +55,20 @@ const showFlashMessage = (show, msg, type) => {
 //clear the whole list
 const clearList = ()=>{
   //alert
+  showFlashMessage(true, 'Items cleared', 'danger')
   setListItem([]);
 }
 
 //delete one item
 const deleteItem = (id)=>{
 //show alert
+showFlashMessage(true, 'item deleted', 'danger')
 setListItem(listItem.filter((list)=> list.id !== id))
 }
 
 const editItem = (id)=>{
   //show alert
+  showFlashMessage(true, 'Edit Item', 'success')
   const edit = listItem.find((item)=> item.id === id);
   // console.log(edit);
   setIsEditing(true);
@@ -90,7 +89,7 @@ useEffect(()=>{
         <div className="form-control">
           <input type="text" className="grocery" placeholder="List" value={input.marketItem} name="marketItem" onChange={handleChange} ref={refContainer}/>
           <input type="number" className="grocery" placeholder="Price" value={input.marketPrice} name="marketPrice" onChange={handleChange}/>
-          <button type="submit" onClick={handleSubmit} className="submit-btn">submit</button>
+          <button type="submit" onClick={handleSubmit} className="submit-btn">{isEditing ? 'edit' : 'submit'}</button>
         </div>
       </form>
     </section>
@@ -100,7 +99,7 @@ useEffect(()=>{
         <List listItem={listItem} deleteItem={deleteItem} editItem={editItem}/>
         <article className="total">
           <p className="title">Total</p>
-          {/* < Test listItem={listItem}/> */}
+          < Total listItem={listItem}/>
         </article>
         <button className="clear-btn" onClick={clearList}>clear items</button>
       </div>

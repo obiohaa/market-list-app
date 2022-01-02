@@ -153,11 +153,7 @@ p {
   transition: var(--transition);
   padding: 0.5rem;
 }
-@media screen and (min-width: 992px) {
-  .section-center {
-    width: 95vw;
-  }
-
+@media screen and (min-width: 850px) {
   .grocery {
     padding: 0.25rem;
     padding-left: 1rem;
@@ -171,6 +167,7 @@ p {
     margin-right: 0.7rem;
   }
 }
+
 main {
   min-height: 100vh;
   display: grid;
@@ -260,9 +257,9 @@ Grocery List
   margin-top: 2rem;
 }
 
-.grocery-item, .total{
+.grocery-item {
   display: grid;
-  grid-template-columns: minmax(0, 163px) minmax(0, 163px) 163px;
+  grid-template-columns: minmax(0, 193px) minmax(0, 103px) 163px;
   min-width:0;
   column-gap: 3rem;
   justify-items: center;
@@ -274,7 +271,16 @@ Grocery List
   background: var(--clr-grey-10);
 }
 .total{
-  
+  display: grid;
+  grid-template-columns: minmax(0, 193px) minmax(0, 103px) 163px;
+  column-gap: 3rem;
+  justify-items: center;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+  padding: 0.25rem 1rem;
+  border-radius: var(--radius);
+  text-transform: capitalize;
+  background: var(--clr-grey-10);
 }
 
 .grocery-item:hover {
